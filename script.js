@@ -1,320 +1,508 @@
-// ===========================
-// GSAP Registration
-// ===========================
 
-gsap.registerPlugin(ScrollTrigger);
-
-// ===========================
-// Hero Animation
-// ===========================
-
-gsap.from("header", {
-    y: -80,
-    opacity: 0,
-    duration: 1,
-    ease: "power3.out"
-});
-
-gsap.from(".hero-content .tag", {
-    y: 40,
-    opacity: 0,
-    duration: 0.8,
-    delay: 0.3
-});
-
-gsap.from(".hero-content h1", {
-    y: 80,
-    opacity: 0,
-    duration: 1,
-    delay: 0.5,
-    ease: "power4.out"
-});
-
-gsap.from(".hero-content p", {
-    y: 40,
-    opacity: 0,
-    duration: 1,
-    delay: 0.8
-});
-
-gsap.from(".hero-buttons", {
-    y: 30,
-    opacity: 0,
-    duration: 1,
-    delay: 1
-});
-
-gsap.from(".hero-image img", {
-    x: 120,
-    opacity: 0,
-    duration: 1.4,
-    ease: "power4.out"
-});
-
-// ===========================
-// Floating Machine Effect
-// ===========================
-
-gsap.to(".hero-image img", {
-    y: -20,
-    duration: 2.8,
-    repeat: -1,
-    yoyo: true,
-    ease: "sine.inOut"
-});
-
-// ===========================
-// Section Fade Animation
-// ===========================
-
-gsap.utils.toArray("section").forEach(section => {
-
-    gsap.from(section, {
-
-        opacity: 0,
-        y: 80,
-
-        duration: 1,
-
-        scrollTrigger: {
-
-            trigger: section,
-            start: "top 80%"
-
-        }
-
-    });
-
-});
-
-// ===========================
-// Product Cards
-// ===========================
-
-gsap.utils.toArray(".product-card").forEach((card, i) => {
-
-    gsap.from(card, {
-
-        y: 80,
-
-        opacity: 0,
-
-        duration: 0.7,
-
-        delay: i * 0.12,
-
-        scrollTrigger: {
-
-            trigger: card,
-            start: "top 85%"
-
-        }
-
-    });
-
-});
-
-// ===========================
-// Technology Cards
-// ===========================
-
-gsap.utils.toArray(".tech-grid div").forEach((card, i) => {
-
-    gsap.from(card, {
-
-        scale: .8,
-
-        opacity: 0,
-
-        duration: .8,
-
-        delay: i * .1,
-
-        scrollTrigger: {
-
-            trigger: card,
-            start: "top 85%"
-
-        }
-
-    });
-
-});
-
-// ===========================
-// Statistics Counter
-// ===========================
-
-document.querySelectorAll(".stats h2").forEach(counter => {
-
-    const finalValue = counter.innerText;
-
-    const number = parseInt(finalValue);
-
-    if (!isNaN(number)) {
-
-        let obj = { value: 0 };
-
-        gsap.to(obj, {
-
-            value: number,
-
-            duration: 2,
-
-            ease: "power2.out",
-
-            scrollTrigger: {
-
-                trigger: counter,
-
-                start: "top 85%"
-
-            },
-
-            onUpdate: () => {
-
-                if (finalValue.includes("%")) {
-
-                    counter.innerText = Math.floor(obj.value) + "%";
-
-                } else if (finalValue.includes("+")) {
-
-                    counter.innerText = Math.floor(obj.value) + "+";
-
-                } else {
-
-                    counter.innerText = Math.floor(obj.value);
-
-                }
-
-            }
-
-        });
-
-    }
-
-});
-
-// ===========================
-// Button Hover Animation
-// ===========================
-
-document.querySelectorAll("button,.btn,.primary-btn,.secondary-btn").forEach(btn => {
-
-    btn.addEventListener("mouseenter", () => {
-
-        gsap.to(btn, {
-
-            scale: 1.06,
-            duration: .25
-
-        });
-
-    });
-
-    btn.addEventListener("mouseleave", () => {
-
-        gsap.to(btn, {
-
-            scale: 1,
-            duration: .25
-
-        });
-
-    });
-
-});
-
-// ===========================
-// Mouse Parallax
-// ===========================
-
-document.addEventListener("mousemove", (e) => {
-
-    const x = (e.clientX / window.innerWidth - 0.5) * 30;
-    const y = (e.clientY / window.innerHeight - 0.5) * 30;
-
-    gsap.to(".hero-image img", {
-
-        x,
-        y,
-
-        duration: .8,
-
-        ease: "power2.out"
-
-    });
-
-});
-
-// ===========================
-// Header Background
-// ===========================
-
-window.addEventListener("scroll", () => {
-
-    const header = document.querySelector("header");
-
-    if (window.scrollY > 50) {
-
-        header.style.background = "rgba(5,10,15,.95)";
-        header.style.boxShadow = "0 10px 30px rgba(0,0,0,.35)";
-
-    } else {
-
-        header.style.background = "rgba(11,15,20,.75)";
-        header.style.boxShadow = "none";
-
-    }
-
-});
-
-// ===========================
-// Scroll Progress Bar
-// ===========================
-
-const progress = document.createElement("div");
-
-progress.style.position = "fixed";
-progress.style.top = "0";
-progress.style.left = "0";
-progress.style.height = "4px";
-progress.style.width = "0%";
-progress.style.background = "#22c55e";
-progress.style.zIndex = "99999";
-
-document.body.appendChild(progress);
-
-window.addEventListener("scroll", () => {
-
-    const total = document.documentElement.scrollHeight - window.innerHeight;
-
-    const percent = (window.scrollY / total) * 100;
-
-    progress.style.width = percent + "%";
-
-});
-
-// ===========================
-// Smooth Anchor Links
-// ===========================
-
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-
-    link.addEventListener("click", function(e){
-
-        e.preventDefault();
-
-        const target = document.querySelector(this.getAttribute("href"));
-
-        if(target){
-
-            target.scrollIntoView({
-                behavior:"smooth"
-            });
-
-        }
-
-    });
-
-});
+/* ==========================================
+   NUTRIVEND - Premium Landing Page
+========================================== */
+
+:root{
+    --green:#22c55e;
+    --green-dark:#16a34a;
+    --black:#0b0f14;
+    --dark:#111827;
+    --white:#ffffff;
+    --gray:#94a3b8;
+    --card:#161f2b;
+    --shadow:0 20px 50px rgba(0,0,0,.35);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:var(--black);
+    color:var(--white);
+    overflow-x:hidden;
+}
+
+/* Animated Background */
+
+body::before{
+    content:"";
+    position:fixed;
+    width:700px;
+    height:700px;
+    border-radius:50%;
+    background:radial-gradient(var(--green),transparent 70%);
+    opacity:.08;
+    top:-250px;
+    right:-250px;
+    filter:blur(80px);
+    z-index:-2;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    background:#0ea5e9;
+    opacity:.05;
+    bottom:-200px;
+    left:-200px;
+    filter:blur(90px);
+    z-index:-2;
+}
+
+/* Header */
+
+header{
+    position:fixed;
+    width:100%;
+    top:0;
+    left:0;
+    padding:22px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(11,15,20,.75);
+    backdrop-filter:blur(18px);
+    z-index:999;
+}
+
+.logo{
+    font-size:30px;
+    font-weight:800;
+    color:var(--green);
+    letter-spacing:2px;
+}
+
+nav{
+    display:flex;
+    gap:35px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:var(--green);
+}
+
+.btn{
+    background:var(--green);
+    color:white;
+    text-decoration:none;
+    padding:14px 28px;
+    border-radius:40px;
+    transition:.35s;
+}
+
+.btn:hover{
+    background:var(--green-dark);
+    transform:translateY(-3px);
+}
+
+/* Hero */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:70px;
+    padding:140px 8%;
+}
+
+.hero-content{
+    flex:1;
+}
+
+.tag{
+    display:inline-block;
+    background:rgba(34,197,94,.12);
+    border:1px solid rgba(34,197,94,.25);
+    color:var(--green);
+    padding:8px 16px;
+    border-radius:40px;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:72px;
+    line-height:1.05;
+    margin-bottom:25px;
+}
+
+.hero p{
+    color:var(--gray);
+    font-size:19px;
+    line-height:1.8;
+    margin-bottom:35px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:20px;
+}
+
+.primary-btn,
+.secondary-btn{
+    padding:16px 30px;
+    text-decoration:none;
+    border-radius:50px;
+    transition:.3s;
+}
+
+.primary-btn{
+    background:var(--green);
+    color:white;
+}
+
+.primary-btn:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 30px rgba(34,197,94,.4);
+}
+
+.secondary-btn{
+    border:1px solid rgba(255,255,255,.2);
+    color:white;
+}
+
+.secondary-btn:hover{
+    background:white;
+    color:black;
+}
+
+.hero-image{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+.hero-image img{
+    width:480px;
+    max-width:100%;
+    filter:drop-shadow(0 20px 50px rgba(34,197,94,.35));
+    animation:float 5s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-18px);}
+}
+
+/* Sections */
+
+section{
+    padding:110px 8%;
+}
+
+section h2{
+    text-align:center;
+    font-size:42px;
+    margin-bottom:60px;
+}
+
+/* Trusted */
+
+.locations{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:25px;
+}
+
+.location{
+    background:var(--card);
+    border-radius:20px;
+    padding:35px;
+    text-align:center;
+    transition:.35s;
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.location:hover{
+    transform:translateY(-8px);
+    border-color:var(--green);
+}
+
+/* Products */
+
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:30px;
+}
+
+.product-card img{
+
+    width:100%;
+
+    height:180px;      /* Reduce image height */
+
+    object-fit:contain; /* Keeps the whole machine visible */
+
+    background:#fff;   /* Optional clean white background */
+
+    padding:15px;
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+
+    transition:.4s;
+
+}
+
+.product-card:hover{
+    transform:translateY(-12px);
+    box-shadow:var(--shadow);
+}
+
+.product-card h3{
+    margin:20px 0 10px;
+    color:var(--green);
+}
+
+.product-card p{
+    color:var(--gray);
+}
+
+/* Technology */
+
+.tech-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
+
+.tech-grid div{
+    background:var(--card);
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    transition:.3s;
+}
+
+.tech-grid div:hover{
+    transform:scale(1.04);
+}
+
+/* Franchise */
+
+form{
+    max-width:800px;
+    margin:auto;
+    display:grid;
+    gap:18px;
+}
+
+input,
+textarea{
+    padding:18px;
+    border-radius:14px;
+    border:none;
+    background:#1f2937;
+    color:white;
+    font-size:16px;
+}
+
+textarea{
+    resize:none;
+    height:180px;
+}
+
+form button{
+    padding:18px;
+    background:var(--green);
+    color:white;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    font-size:17px;
+    transition:.3s;
+}
+
+form button:hover{
+    background:var(--green-dark);
+}
+
+/* Stats */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:30px;
+}
+
+.stats div{
+    background:var(--card);
+    border-radius:22px;
+    padding:45px;
+    text-align:center;
+}
+
+.stats h2{
+    color:var(--green);
+    margin-bottom:10px;
+}
+
+/* Footer */
+
+footer{
+    background:#090c10;
+    padding:60px 20px;
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+footer h2{
+    color:var(--green);
+    margin-bottom:15px;
+}
+
+footer p{
+    color:var(--gray);
+    margin:8px 0;
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+
+.hero{
+    flex-direction:column;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:52px;
+}
+
+.stats{
+    grid-template-columns:repeat(2,1fr);
+}
+
+nav{
+    display:none;
+}
+
+}
+
+@media(max-width:600px){
+
+.hero h1{
+    font-size:38px;
+}
+
+.hero-buttons{
+    flex-direction:column;
+}
+
+.stats{
+    grid-template-columns:1fr;
+}
+
+section h2{
+    font-size:32px;
+}
+
+header{
+    padding:18px 5%;
+}
+
+}
+.gallery-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:30px;
+
+}
+
+.gallery-grid img{
+
+width:100%;
+
+border-radius:25px;
+
+transition:.4s;
+
+box-shadow:0 20px 50px rgba(0,0,0,.3);
+
+}
+
+.gallery-grid img:hover{
+
+transform:translateY(-15px);
+
+}
+.locations-showcase {
+    padding: 100px 8%;
+    text-align: center;
+}
+
+.section-subtitle {
+    color: #888;
+    margin-bottom: 40px;
+}
+
+.location-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.location-card {
+    background: #151515;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: 0.35s ease;
+}
+
+.location-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+}
+
+.location-card h3 {
+    padding: 20px;
+    color: white;
+}
+
+.location-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 20px;
+    transition: 0.4s ease;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.04);
+}
