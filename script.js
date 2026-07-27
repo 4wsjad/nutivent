@@ -506,3 +506,226 @@ transform:translateY(-15px);
 .gallery-grid img:hover {
     transform: scale(1.04);
 }
+/* ==============================
+   Tablet
+================================*/
+
+@media (max-width: 992px){
+
+header{
+
+padding:15px 5%;
+
+}
+
+.hero{
+
+flex-direction:column;
+
+text-align:center;
+
+padding-top:120px;
+
+}
+
+.hero-content{
+
+width:100%;
+
+}
+
+.hero-image{
+
+margin-top:40px;
+
+}
+
+.hero-image img{
+
+width:80%;
+
+max-width:450px;
+
+margin:auto;
+
+}
+
+.product-grid,
+.tech-grid,
+.gallery-grid,
+.location-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.stats{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+
+/* ==============================
+   Mobile
+================================*/
+
+@media (max-width:768px){
+
+header{
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+nav{
+
+display:flex;
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+gap:15px;
+
+}
+
+.hero{
+
+padding:100px 20px 60px;
+
+}
+
+.hero h1{
+
+font-size:2.4rem;
+
+line-height:1.2;
+
+}
+
+.hero p{
+
+font-size:16px;
+
+}
+
+.hero-buttons{
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+.hero-buttons a{
+
+width:100%;
+
+text-align:center;
+
+}
+
+.hero-image img{
+
+width:95%;
+
+}
+
+.product-grid,
+.tech-grid,
+.gallery-grid,
+.location-grid,
+.stats{
+
+grid-template-columns:1fr;
+
+}
+
+.product-card,
+.location-card{
+
+max-width:100%;
+
+}
+
+.gallery-grid img{
+
+height:220px;
+
+}
+
+form{
+
+padding:25px;
+
+}
+
+input,
+textarea,
+button{
+
+width:100%;
+
+font-size:16px;
+
+}
+
+footer{
+
+text-align:center;
+
+}
+
+}
+
+
+/* ==============================
+   Small Phones
+================================*/
+
+@media (max-width:480px){
+
+.logo{
+
+font-size:22px;
+
+}
+
+.hero h1{
+
+font-size:2rem;
+
+}
+
+.tag{
+
+font-size:12px;
+
+}
+
+h2{
+
+font-size:28px;
+
+}
+
+.hero-image img{
+
+width:100%;
+
+}
+
+.gallery-grid img{
+
+height:180px;
+
+}
+
+}
